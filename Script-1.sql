@@ -1,4 +1,4 @@
-USE amazonSales;
+CREATE DATABASE amazonSales;
 
 CREATE TABLE sales (
     ID INT NOT NULL,
@@ -28,5 +28,24 @@ CREATE TABLE sales (
 );
 
 ALTER TABLE sales MODIFY COLUMN sku VARCHAR(50);
+
+USE amazonSales;
+
+-- Number of each categories of products sold
+SELECT category, COUNT(id) AS Num_sold
+FROM sales
+GROUP BY category;
+
+
+-- Number of orders by city
+SELECT ship_city, COUNT(id)
+FROM sales
+GROUP BY ship_city 
+ORDER BY COUNT(id) DESC;
+
+-- Amount from each category 
+SELECT category, ROUND(SUM(amount), 2) AS Total_amt
+FROM sales
+GROUP BY category;
 
 
